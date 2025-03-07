@@ -11,17 +11,14 @@ import base64
 app = Flask(__name__)
 
 class DataIngestion:
-    @staticmethod
     def read_csv(file_path):
         return pd.read_csv(file_path)
 
-    @staticmethod
     def read_json(file_path):
         with open(file_path, 'r') as file:
             data = json.load(file)
         return pd.json_normalize(data)
 
-    @staticmethod
     def read_pdf(file_path):
         doc = fitz.open(file_path)
         text = []
@@ -29,7 +26,6 @@ class DataIngestion:
             text.append(page.get_text())
         return pd.DataFrame({'Content': text})
 
-    @staticmethod
     def read_pptx(file_path):
         prs = Presentation(file_path)
         text = []
@@ -40,16 +36,13 @@ class DataIngestion:
         return pd.DataFrame({'Content': text})
 
 class DataProcessor:
-    @staticmethod
     def clean_data(df):
         return df.dropna().reset_index(drop=True)
 
-    @staticmethod
     def merge_data(dfs):
         return pd.concat(dfs, ignore_index=True)
 
 class Visualization:
-    @staticmethod
     def generate_bar_chart(data, column):
         plt.figure(figsize=(10, 6))
         data[column].value_counts().plot(kind='bar')
