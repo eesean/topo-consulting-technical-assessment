@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template
 import pandas as pd
-import fitz  # PyMuPDF
+import pymupdf
 from pptx import Presentation
 import json
 import os
@@ -20,7 +20,7 @@ class DataIngestion:
         return pd.json_normalize(data)
 
     def read_pdf(file_path):
-        doc = fitz.open(file_path)
+        doc = pymupdf.open(file_path)
         text = []
         for page in doc:
             text.append(page.get_text())
