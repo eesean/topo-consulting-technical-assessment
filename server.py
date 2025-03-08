@@ -3,7 +3,6 @@ import pandas as pd
 import pymupdf
 from pptx import Presentation
 import json
-import os
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
@@ -60,17 +59,17 @@ class Visualization:
 
 @app.route('/')
 def index():
-    csv_data = DataIngestion.read_csv("data.csv")
+    csv_data = DataIngestion.read_csv("datasets/dataset2.csv")
     cleaned_csv = DataProcessor.clean_data(csv_data)
     chart = Visualization.generate_bar_chart(cleaned_csv, csv_data.columns[0])
     return render_template("index.html", chart=chart)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
-    csv_data = DataIngestion.read_csv("data.csv")
-    json_data = DataIngestion.read_json("data.json")
-    pdf_data = DataIngestion.read_pdf("data.pdf")
-    pptx_data = DataIngestion.read_pptx("data.pptx")
+    csv_data = DataIngestion.read_csv("datasets/dataset2.csv")
+    json_data = DataIngestion.read_json("datasets/dataset1.json")
+    pdf_data = DataIngestion.read_pdf("datasets/dataset3.pdf")
+    pptx_data = DataIngestion.read_pptx("datasets/dataset4.pptx")
 
     merged = DataProcessor.merge_data([csv_data, json_data, pdf_data, pptx_data])
     cleaned = DataProcessor.clean_data(merged)
@@ -79,13 +78,13 @@ def get_data():
 @app.route('/api/data/<file_type>', methods=['GET'])
 def get_data_by_type(file_type):
     if file_type == 'csv':
-        data = DataIngestion.read_csv("data.csv")
+        data = DataIngestion.read_csv("datasets/dataset2.csv")
     elif file_type == 'json':
-        data = DataIngestion.read_json("data.json")
+        data = DataIngestion.read_json("datasets/dataset1.json")
     elif file_type == 'pdf':
-        data = DataIngestion.read_pdf("data.pdf")
+        data = DataIngestion.read_pdf("datasets/dataset3.pdf")
     elif file_type == 'pptx':
-        data = DataIngestion.read_pptx("data.pptx")
+        data = DataIngestion.read_pptx("datasets/dataset4.pptx")
     else:
         return jsonify({"error": "Unsupported file type"}), 400
     cleaned = DataProcessor.clean_data(data)
