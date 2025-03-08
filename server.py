@@ -7,8 +7,10 @@ import os
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 class DataIngestion:
     def read_csv(file_path):
