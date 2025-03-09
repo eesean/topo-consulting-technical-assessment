@@ -7,7 +7,7 @@ const Homepage = () => {
 
     // Fetch data from Flask API
     useEffect(() => {
-        axios.get("http://127.0.0.1:5000/api/data")
+        axios.get("http://127.0.0.1:5000")
             .then(response => {
                 setData(response.data);
             })
@@ -26,9 +26,7 @@ const Homepage = () => {
                 {/* Display fetched data */}
                 <Heading fontSize="xl" mt={5}>Data from Flask:</Heading>
                 {data.length > 0 ? (
-                    data.map((item, index) => (
-                        <Text key={index}>{JSON.stringify(item)}</Text>
-                    ))
+                    data
                 ) : (
                     <Text>Loading data...</Text>
                 )}
