@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Heading, Button, Container, Text } from '@chakra-ui/react';
+import { Heading, Container, Text } from '@chakra-ui/react';
 
 const Homepage = () => {
     const [data, setData] = useState([]);
@@ -22,14 +22,6 @@ const Homepage = () => {
                 Home Page
             </Heading>
             <Container>
-                <Button
-                    m="5px"
-                    colorScheme="teal"
-                    width="480px"
-                    variant="solid"
-                    onClick={() => console.log("Choosing a language")}>
-                    Please choose a Language to learn!!
-                </Button>
 
                 {/* Display fetched data */}
                 <Heading fontSize="xl" mt={5}>Data from Flask:</Heading>

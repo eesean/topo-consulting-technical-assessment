@@ -62,7 +62,7 @@ def index():
     csv_data = DataIngestion.read_csv("datasets/dataset2.csv")
     cleaned_csv = DataProcessor.clean_data(csv_data)
     chart = Visualization.generate_bar_chart(cleaned_csv, csv_data.columns[0])
-    return render_template("index.html", chart=chart)
+    return jsonify(chart)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
